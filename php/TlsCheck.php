@@ -4,6 +4,7 @@ $ch = curl_init();
 
 curl_setopt($ch, CURLOPT_URL, "https://tlstest.paypal.com/"); 
 curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
+curl_setopt($ch, CURLOPT_SSLVERSION, 6);
 
 curl_exec($ch);
 echo "\n";
