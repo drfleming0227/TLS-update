@@ -22,13 +22,17 @@ To get started, use the following notes to check the TLSv1.2 readiness for your 
 * [Python](#python)
 * [Ruby](#ruby)
 * [Node](#node)
-* 
+* [Native Mobile Apps](#native-mobile-apps)
 
 ### Prerequisites 
 
 These checks assume that you have installed all the libraries required by the PayPal REST and Braintree SDKs. For these checks to be valid, run them on a production system or one that *exactly* matches the production configuration.
 
 ### Java
+
+* [Java versions and TLS support](#java-versions-and-tls-support)
+* [To check Java and TLS versions](#to-check-java-and-tls-versions)
+* [Supported SDKs](#supported-sdks-java)
 
 #### Java versions and TLS support
 
@@ -72,6 +76,8 @@ These checks assume that you have installed all the libraries required by the Pa
         Failed to connect to TLS 1.2 endpoint.
         ```
 
+<a id="supported-sdks-java"></a>
+
 #### Supported SDKs
 
 - [PayPal](PayPal/README.md#java)
@@ -110,44 +116,45 @@ PHP uses the system-supplied cURL library, which requires OpenSSL 1.0.1c or late
 
 #### Guidelines
 
-* Find OpenSSL in these locations:
-    1. OpenSSL installed in your Operating System `openssl version`.
-    1. OpenSSL extension installed in your PHP.  This can be found in your `php.ini`.
-    1. OpenSSL used by PHP_CURL.`curl_version()`.
+Find OpenSSL in these locations:
 
-* These OpenSSL extensions can be different, and you update each one separately.
+1. OpenSSL installed in your Operating System `openssl version`.
+1. OpenSSL extension installed in your PHP.  This can be found in your `php.ini`.
+1. OpenSSL used by PHP_CURL.`curl_version()`. <a id="option-3"></a>
 
-* The one that PayPal or any other PHP SDK uses to make HTTP connections is the one used by PHP_CURL (option 3). The PHP_CURL OpenSSL must support TLSv1.2.
+These OpenSSL extensions can be different, and you update each one separately.
 
-* The `php_curl` library uses its own version of the OpenSSL library, which is not the same version that PHP uses, which is the `openssl.so` file in `php.ini`.
+The one that PayPal or any other PHP SDK uses to make HTTP connections is the one used by [PHP_CURL](#option-3). The PHP_CURL OpenSSL must support TLSv1.2.
 
-* To find the `openssl_version` information for cURL, run:
+The `php_curl` library uses its own version of the OpenSSL library, which is not the same version that PHP uses, which is the `openssl.so` file in `php.ini`.
+
+#### To check PHP and TLS versions:
+
+1. To find the `openssl_version` information for cURL, run:
 
     ```
     php -r 'echo json_encode(curl_version(), JSON_PRETTY_PRINT);'
     ```
 
-* The `php_curl` version shown here might be different from the `openssl version`, because they are different components.
+    The `php_curl` version shown here might be different from the `openssl version`, because they are different components.
 
-* When you update your OpenSSL libraries, you must update the `php_curl` OpenSSL version, and not the OS OpenSSL version.
+1. When you update your OpenSSL libraries, you must update the `php_curl` OpenSSL version, and not the OS OpenSSL version.
 
-#### To check PHP and TLS versions:
+1. In a shell on your **production system**:
 
-In a shell on your **production system**:
+    1. Download [cacert.pem](php/cacert.pem).
+    1. Download [TlsCheck.php](php/TlsCheck.php).
+    1. Run `php -f TlsCheck.php`.
 
-1. Download [cacert.pem](php/cacert.pem).
-1. Download [TlsCheck.php](php/TlsCheck.php).
-1. Run `php -f TlsCheck.php`.
-
-    * On success:
-        ```
-        PayPal_Connection_OK
-        ```
-    
-    * On failure:
-        ```
-        curl_error information
-        ```
+        * On success:
+            ```
+            PayPal_Connection_OK
+            ```
+        
+        * On failure:
+            ```
+            curl_error information
+            ```
 
 These actions help you determine your openssl version.
 
@@ -159,20 +166,33 @@ These actions help you determine your openssl version.
 
 Python uses the system-supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later.
 
-To check Python, in a shell on your **production system**, run: 
+#### To check Python and TLS versions:
 
-For Python 2.x:
+1. In a shell on your **production system**, run: 
 
-`$ python -c "import urllib2; print(urllib2.urlopen('https://tlstest.paypal.com/').read())"`
+    For Python 2.x:
 
-For Python 3.x:
+    ```
+    $ python -c "import urllib2; print(urllib2.urlopen('https://tlstest.paypal.com/').read())"
+    ```
 
-`$ python -c "import urllib.request; print(urllib.request.urlopen('https://tlstest.paypal.com/').read())"`
+    For Python 3.x:
 
-- On success, `PayPal_Connection_OK` is printed.
-- On failure, an `URLError` will be raised: <br/>
-`urllib2.URLError: <urlopen error EOF occurred in violation of protocol (_ssl.c:590)>`
-`urllib2.URLError: <urlopen error [Errno 54] Connection reset by peer>`
+    ```
+    $ python -c "import urllib.request; print(urllib.request.urlopen('https://tlstest.paypal.com/').read())"
+    ```
+
+    * On success:
+        ```
+        PayPal_Connection_OK
+        ```
+    * On failure, an `URLError` is raised:
+        ```
+        urllib2.URLError: <urlopen error EOF occurred in violation of protocol (_ssl.c:590)>
+        ```
+        ```
+        urllib2.URLError: <urlopen error [Errno 54] Connection reset by peer>
+        ```
 
 ### Ruby
 
@@ -180,7 +200,7 @@ Ruby 2.0.0 or above is required to use TLSv1.2 from the system supplied OpenSSL.
 
 *For the PayPal legacy Ruby SDK (packaged as `PP_Ruby_NVP_SDK.zip`), please download [this update](https://github.com/paypal/TLS-update/blob/master/ruby/PP_Ruby_NVP_SDK.zip).*
 
-To check Ruby:
+#### To check Ruby and TLS versions:
 
 1. In a shell on your **production system**, run:
 
@@ -196,19 +216,23 @@ To check Ruby:
 
         * On failure, a `OpenSSL::SSL::SSLError` or `EOFError` is thrown.
 
-### Node.js
+### Node
 
 Node.js uses the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later.
 
-To check Node, in a shell on your **production system**, run:
+#### To check Node and TLS versions:
 
-`$ node -e "var https = require('https'); https.get('https://tlstest.paypal.com/', function(res){ console.log(res.statusCode) });"`
+1. In a shell on your **production system**, run:
 
-* On success:
     ```
-    200
+    $ node -e "var https = require('https'); https.get('https://tlstest.paypal.com/', function(res){ console.log(res.statusCode) });"
     ```
-* On failure, a network error occurs.
+
+    * On success:
+        ```
+        200
+        ```
+    * On failure, a network error occurs.
 
 ## Native Mobile Apps
 
@@ -222,7 +246,8 @@ After the TLSv1.2 upgrade, native app support for user devices older than API 16
 
 Users of the PayPal or Braintree Android SDKs should simply update to the latest version. Outside of the SDK, we have provided [an example Android app](android/) to illustrate how to support TLSv1.2.
 
-##### Supported SDKs
+#### Supported SDKs
+
 - [PayPal](PayPal/README.md#android)
 - [Braintree](Braintree/README.md#android)
 
