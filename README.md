@@ -13,7 +13,7 @@ For more official, relevant information, see the [PayPal Technical Support websi
 
 Merchants must verify that all their systems can use the TLSv1.2 protocol with a SHA-256 certificate. Make sure that you are up-to-date with security updates including current versions of operating systems, encryption libraries, and runtime environments.
 
-To help you get started, use the following notes to check the TLSv1.2 readiness for your environments:
+To get started, use the following notes to check the TLSv1.2 readiness for your environments:
 
 * [Prerequisites](#prerequisites)
 * [Java](#java)
@@ -32,16 +32,16 @@ These checks assume that you have installed all the libraries required by the Pa
 
 #### Java versions and TLS support
 
-**The latest Java (currently 8) is preferred.** In Java 8, TLSv1.2 is the default.
+> **Note:** Java 8 is preferred because TLSv1.2 is the default in this Java version.
 
 | Java&nbsp;version | TLSv1.2&nbsp;support | Requirements |
 |:--------------|:-----------------|:--------------|
-| 5&nbsp;and&nbsp;earlier | No support | |
+| 5&nbsp;and&nbsp;earlier | No support | Upgrade to Java 6 or later. |
 | 6 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>At least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li></ul> |
 | 7 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li><ul> |
 | 8 | Default | <ul><li>No code change is required.</li><li>Make sure that you're using the latest [PayPal SDK](PayPal/README.md#java).</li></ul> |
 
-#### To check Java:
+#### To check your Java and TLS versions:
 
 1. Set the TLS version through [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html).
 1. Verify that Java runtime 6 or later is installed:
