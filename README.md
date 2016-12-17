@@ -47,7 +47,8 @@ These checks assume that you have installed all the libraries required by the Pa
 
 #### To check your Java and TLS versions
 
-1. Set the TLS version through [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html).
+1. Set the TLS version through the [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html) class.
+
 1. Verify that Java runtime 6 or later is installed:
 
     ```
@@ -56,7 +57,9 @@ These checks assume that you have installed all the libraries required by the Pa
 
     If you have Java 5 or earlier, upgrade it. 
 
-1. Download [the provided test application](java).
+    > **Note:** Java 8 is preferred because TLSv1.2 is the default in this Java version.
+
+1. Download the [TLS update](java).
 
 1. In a shell on your **production system**, run:
 
@@ -206,13 +209,15 @@ Python uses the system-supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or late
 
 ### Ruby
 
-Ruby 2.0.0 or above is required to use TLSv1.2 from the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later. Therefore, both `Ruby > 2.0.0` and `OpenSSL > 1.0.1c` are required. You may also need to run `bundle update` to update your dependencies.
+Ruby 2.0.0 or later is required to use TLSv1.2 from the system-supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later. 
 
-*For the PayPal legacy Ruby SDK (packaged as `PP_Ruby_NVP_SDK.zip`), download [this update](https://github.com/paypal/TLS-update/blob/master/ruby/PP_Ruby_NVP_SDK.zip).*
+Therefore, both `Ruby > 2.0.0` and `OpenSSL > 1.0.1c` are required. You might also need to run `bundle update` to update your dependencies.
 
 * [To check your Ruby and TLS versions](#to-check-your-ruby-and-tls-versions)
 
 #### To check Ruby and TLS versions
+
+1. For the PayPal legacy Ruby SDK, packaged as `PP_Ruby_NVP_SDK.zip`, download [this update](https://github.com/paypal/TLS-update/blob/master/ruby/PP_Ruby_NVP_SDK.zip).
 
 1. In a shell on your **production system**, run:
 
