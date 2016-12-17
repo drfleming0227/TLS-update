@@ -126,9 +126,12 @@ PHP uses the system-supplied cURL library, which requires OpenSSL 1.0.1c or late
 
 Find OpenSSL in these locations:
 
-1. OpenSSL installed in your Operating System `openssl version`.
-1. OpenSSL extension installed in your PHP.  This can be found in your `php.ini`.
-1. OpenSSL used by PHP_CURL.`curl_version()`. <a id="option-3"></a>
+1. OpenSSL installed in your operating system's `openssl version`.
+
+1. OpenSSL extension installed in your PHP. Find this in your `php.ini`.
+
+<a id="option-3"></a>
+1. OpenSSL used by PHP_CURL.`curl_version()`.
 
 These OpenSSL extensions can be different, and you update each one separately.
 
