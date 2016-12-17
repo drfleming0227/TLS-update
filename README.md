@@ -1,8 +1,6 @@
 # TLSv1.2 Requirement
 
-The Payment Card Industry Security Standards Council (PCI SSC) [mandates](http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls) that early versions of TLS be retired from service. 
-
-As part of this requirement, PayPal and Braintree are making this upgrade alongside the rest of the payments industry. **All credit card processors must make these changes** by the PCI deadline, so expect to see similar announcements from other payment providers that you might use.
+The Payment Card Industry Security Standards Council (PCI SSC) [mandates](http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls) that early versions of TLS be retired from service. **All credit card processors must make these changes** by the PCI deadline, so expect to see similar announcements from other payment providers that you might use. As part of this requirement, PayPal and Braintree are making this upgrade alongside the rest of the payments industry. 
 
 PayPal and Braintree are updating its services to require TLS 1.2 for all HTTPS connections. PayPal and Braintree will also require HTTP/1.1 for all connections.
 
@@ -35,9 +33,9 @@ These checks assume that you have installed all the libraries required by the Pa
 * Set the TLS version through [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html).
 * **The latest Java (currently 8) is preferred.** In Java 8, TLSv1.2 is the default.
 
-| Java version | TLSv1.2 support |
+| Java&nbsp;version | TLSv1.2 support |
 |--------------|-----------------|
-| 5 and earlier | No support. |
+| 5&nbsp;and&nbsp;earlier | No support. |
 | 6 | Available. TLSv1.2 must be explicitly enabled. Requires at least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).  A [PayPal SDK update](PayPal/README.md#java) or code change may be required. |
 | 7 | Available. TLSv1.2 must be explicitly enabled. A [PayPal SDK update](PayPal/README.md#java) or code change may be required. |
 | 8 | Default. TLSv1.2 is enabled by default. No code change is required, though it is always recommended to make sure you're using the latest [PayPal SDK](PayPal/README.md#java). |
