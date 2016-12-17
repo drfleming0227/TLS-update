@@ -36,9 +36,9 @@ These checks assume that you have installed all the libraries required by the Pa
 | Java&nbsp;version | TLSv1.2&nbsp;support | Requirements |
 |:--------------|:-----------------|:--------------|
 | 5&nbsp;and&nbsp;earlier | No support | |
-| 6 | Available | You must explicitly enable TLSv1.2.<br/>Requires at least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html). A [PayPal SDK update](PayPal/README.md#java) or code change may be required. |
-| 7 | Available | You must explicitly enable TLSv1.2.<br/>A [PayPal SDK update](PayPal/README.md#java) or code change might be required. |
-| 8 | Default | No code change is required.<br/>Make sure that you're using the latest [PayPal SDK](PayPal/README.md#java). |
+| 6 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>At least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li></ul> |
+| 7 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li><ul> |
+| 8 | Default | <ul><li>No code change is required.</li><li>Make sure that you're using the latest [PayPal SDK](PayPal/README.md#java).</li></ul> |
 
 To check Java:
 
