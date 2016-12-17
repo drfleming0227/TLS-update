@@ -1,39 +1,53 @@
 # TLSv1.2 Requirement
 
-The Payment Card Industry (PCI) Council has [mandated](http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls) that early versions of TLS be retired from service.  All organizations that handle credit card information are required to comply with this standard. As part of this obligation, PayPal and Braintree are updating its services to require TLS 1.2 for all HTTPS connections. PayPal and Braintree will also require HTTP/1.1 for all connections.
+The Payment Card Industry Security Standards Council (PCI SSC) [mandates](http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls) that early versions of TLS be retired from service. **All credit card processors must make these changes** by the PCI deadline, so expect to see similar announcements from other payment providers that you might use. 
 
-You may find more official relevant information at the [PayPal Technical Support website](https://www.paypal-techsupport.com):
+As part of this requirement, PayPal and Braintree are making this upgrade alongside the rest of the payments industry. PayPal and Braintree are updating its services to require TLS 1.2 for all HTTPS connections. PayPal and Braintree will also require HTTP/1.1 for all connections.
+
+For more official, relevant information, see the [PayPal Technical Support website](https://www.paypal-techsupport.com):
 * [TLS 1.2 and HTTP/1.1 Upgrade Microsite](https://www.paypal-knowledge.com/infocenter/index?page=content&id=FAQ1914&expand=true&locale=en_US)
-* [2016 Merchant Security Roadmap Microsite](https://www.paypal-knowledge.com/infocenter/index?page=content&id=FAQ1913&expand=true&locale=en_US)
+* [2016-2017 Merchant Security Roadmap Microsite](https://www.paypal-knowledge.com/infocenter/index?page=content&id=FAQ1913&expand=true&locale=en_US)
 * [SSL Certificate Upgrade Microsite](https://www.paypal-knowledge.com/infocenter/index?page=content&id=FAQ1766&expand=true&locale=en_US)
 
 ## What does this mean for PayPal and Braintree merchants?
 
-Merchants should verify that all of their systems are capable of using the TLSv1.2 protocol with a SHA-256 certificate. In most cases this means ensuring that you are up to date with security updates, including current versions of operating systems, encryption libraries, and runtime environments.
+Merchants must verify that all their systems can use the TLSv1.2 protocol with a SHA-256 certificate. Make sure that you are up-to-date with security updates including current versions of operating systems, encryption libraries, and runtime environments.
 
-PayPal and Braintree are making this upgrade alongside the rest of the payments industry. **All credit card processors must make these changes** by the PCI deadline, so you should expect to see similar announcements from other payment providers you might use.
+To help you get started, review these notes for common environments.
 
-To help merchants get started, we've put together a few notes for common environments. These checks assume that you have installed all the libraries required by the PayPal REST and Braintree SDKs. For these checks to be valid, they must be run on a production system or one that *exactly* matches the configuration you have in production.
+* [Prerequisites](#prerequisites)
+* [Java](#java)
+* [.NET](#net)
+* [PHP](#php)
+* [Python](#python)
+* [Ruby](#ruby)
+* [Node](#node)
+* 
+
+### Prerequisites 
+
+These checks assume that you have installed all the libraries required by the PayPal REST and Braintree SDKs. For these checks to be valid, run them on a production system or one that *exactly* matches the production configuration.
 
 ### Java
 
-* The TLS version can be set via [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html).
-* **The latest Java (currently 8) is preferred.** In Java 8, TLSv1.2 is used by default when a TLS version is not specified.
+* Set the TLS version through [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html).
+* **The latest Java (currently 8) is preferred.** In Java 8, TLSv1.2 is the default.
 
-Java version | TLSv1.2 support
---- | ---
-5 and earlier | No support.
-6 | Available. TLSv1.2 must be explicitly enabled. Requires at least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).  A [PayPal SDK update](PayPal/README.md#java) or code change may be required.
-7 | Available. TLSv1.2 must be explicitly enabled. A [PayPal SDK update](PayPal/README.md#java) or code change may be required.
-8 | Default. TLSv1.2 is enabled by default. No code change is required, though it is always recommended to make sure you're using the latest [PayPal SDK](PayPal/README.md#java).
+| Java version | TLSv1.2 support |
+|--------------|-----------------|
+| 5 and earlier | No support. |
+| 6 | Available. TLSv1.2 must be explicitly enabled. Requires at least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).  A [PayPal SDK update](PayPal/README.md#java) or code change may be required. |
+| 7 | Available. TLSv1.2 must be explicitly enabled. A [PayPal SDK update](PayPal/README.md#java) or code change may be required. |
+| 8 | Default. TLSv1.2 is enabled by default. No code change is required, though it is always recommended to make sure you're using the latest [PayPal SDK](PayPal/README.md#java). |
 
-To check Java, first verify that Java runtime 6 or higher is installed by running `java -version` from command line. If you have Java 5 or below, please upgrade it first. Then download [the provided test application](java). And in a shell on your **production system**, run:
+To check Java, first verify that Java runtime 6 or later is installed by running `java -version` from command line. If you have Java 5 or below, please upgrade it first. Then download [the provided test application](java). And in a shell on your **production system**, run:
 `> java -jar TlsCheck.jar`
 
 - On success, `Successfully connected to TLS 1.2 endpoint.` is printed.
 - On failure, `Failed to connect to TLS 1.2 endpoint.` is printed.
 
 ##### Supported SDKs
+
 - [PayPal](PayPal/README.md#java)
 - [Braintree](Braintree/README.md#java)
 
@@ -42,7 +56,7 @@ To check Java, first verify that Java runtime 6 or higher is installed by runnin
 The .NET 4.5 (or greater) runtime must be installed for TLSv1.2 to be enabled.
   * The TLS version can be set via [`ServicePointManager.SecurityProtocol`](https://msdn.microsoft.com/en-us/library/system.net.securityprotocoltype(v=vs.110).aspx).
 
-To check .NET, first verify you have .NET framework 4.5 or higher by running [NetFrameworkVersions](net/NetFrameworkVersions) on the console of your production system. If you do not have .NET 4.5 or above, please upgrade it first.
+To check .NET, first verify you have .NET framework 4.5 or later by running [NetFrameworkVersions](net/NetFrameworkVersions) on the console of your production system. If you do not have .NET 4.5 or above, please upgrade it first.
 
 Then, run [TlsCheck](net/TlsCheck) in a shell on your **production system**:
 `> TlsCheck.exe`
@@ -50,12 +64,13 @@ Then, run [TlsCheck](net/TlsCheck) in a shell on your **production system**:
 - On success, `PayPal_Connection_OK` is printed.
 
 ##### Supported SDKs
+
 - [PayPal](PayPal/README.md#net)
 - [Braintree](Braintree/README.md#net)
 
 ### PHP
 
-PHP uses the system supplied curl library. The curl library requires OpenSSL `1.0.1c` or higher. You may also need to [update your SSL/TLS libraries](http://curl.haxx.se/docs/ssl-compared.html).
+PHP uses the system supplied curl library. The curl library requires OpenSSL `1.0.1c` or later. You may also need to [update your SSL/TLS libraries](http://curl.haxx.se/docs/ssl-compared.html).
 
 > NOTE:
 - There are three places where you will find OpenSSL:
@@ -75,8 +90,8 @@ php -r 'echo json_encode(curl_version(), JSON_PRETTY_PRINT);'
 To check PHP, in a shell on your **production system**:
 
 1. Download [cacert.pem](php/cacert.pem).
-2. Download [TlsCheck.php](php/TlsCheck.php).
-3. Run `php -f TlsCheck.php`.
+1. Download [TlsCheck.php](php/TlsCheck.php).
+1. Run `php -f TlsCheck.php`.
 
 - On success, `PayPal_Connection_OK` is printed.
 - On failure, `curl_error information` will be printed. This will help you determine the openssl version used.
@@ -86,7 +101,7 @@ To check PHP, in a shell on your **production system**:
 
 ### Python
 
-Python uses the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or higher.
+Python uses the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later.
 
 To check Python, in a shell on your **production system**, run: 
 
@@ -105,7 +120,7 @@ For Python 3.x:
 
 ### Ruby
 
-Ruby 2.0.0 or above is required to use TLSv1.2 from the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or higher. Therefore, both `Ruby > 2.0.0` and `OpenSSL > 1.0.1c` are required. You may also need to run `bundle update` to update your dependencies.
+Ruby 2.0.0 or above is required to use TLSv1.2 from the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later. Therefore, both `Ruby > 2.0.0` and `OpenSSL > 1.0.1c` are required. You may also need to run `bundle update` to update your dependencies.
 
 *For the PayPal legacy Ruby SDK (packaged as `PP_Ruby_NVP_SDK.zip`), please download [this update](https://github.com/paypal/TLS-update/blob/master/ruby/PP_Ruby_NVP_SDK.zip).*
 
@@ -118,7 +133,7 @@ To check Ruby, in a shell on your **production system**, run:
 
 ### Node.js
 
-Node.js uses the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or higher.
+Node.js uses the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later.
 
 To check Node, in a shell on your **production system**, run:
 
@@ -145,8 +160,8 @@ Users of the PayPal or Braintree Android SDKs should simply update to the latest
 
 ### iOS
 
-TLSv1.2 support was introduced in iOS 5. The [PayPal iOS SDK](https://github.com/paypal/PayPal-iOS-SDK) and the [Braintree iOS SDK](https://github.com/braintree/braintree_ios) both require iOS 7 or higher. Apps built since 2013 will likely not need any updates.
+TLSv1.2 support was introduced in iOS 5. The [PayPal iOS SDK](https://github.com/paypal/PayPal-iOS-SDK) and the [Braintree iOS SDK](https://github.com/braintree/braintree_ios) both require iOS 7 or later. Apps built since 2013 will likely not need any updates.
 
 ### Windows
 
-Neither PayPal, nor Braintree support any Windows SDKs. For a web browser integration, we recommend [Braintree v.zero for JavaScript](https://developers.braintreepayments.com/javascript+dotnet/guides/client-sdk).
+Neither PayPal nor Braintree support any Windows SDKs. For a web browser integration, we recommend [Braintree v.zero for JavaScript](https://developers.braintreepayments.com/javascript+dotnet/guides/client-sdk).
