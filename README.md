@@ -13,7 +13,7 @@ For more official, relevant information, see the [PayPal Technical Support websi
 
 Merchants must verify that all their systems can use the TLSv1.2 protocol with a SHA-256 certificate. Make sure that you are up-to-date with security updates including current versions of operating systems, encryption libraries, and runtime environments.
 
-To help you get started, review these notes for common environments.
+To help you get started, use the following notes to check the TLSv1.2 readiness for your environments:
 
 * [Prerequisites](#prerequisites)
 * [Java](#java)
@@ -40,13 +40,37 @@ These checks assume that you have installed all the libraries required by the Pa
 | 7 | Available | You must explicitly enable TLSv1.2.<br/>A [PayPal SDK update](PayPal/README.md#java) or code change might be required. |
 | 8 | Default | No code change is required.<br/>Make sure that you're using the latest [PayPal SDK](PayPal/README.md#java). |
 
-To check Java, first verify that Java runtime 6 or later is installed by running `java -version` from command line. If you have Java 5 or below, please upgrade it first. Then download [the provided test application](java). And in a shell on your **production system**, run:
-`> java -jar TlsCheck.jar`
+To check Java:
 
-- On success, `Successfully connected to TLS 1.2 endpoint.` is printed.
-- On failure, `Failed to connect to TLS 1.2 endpoint.` is printed.
+1. Verify that Java runtime 6 or later is installed:
 
-##### Supported SDKs
+    ```
+    java -version
+    ```
+
+    If you have Java 5 or earlier, upgrade it. 
+
+1. Download [the provided test application](java).
+
+1. In a shell on your **production system**, run:
+
+    ```
+    > java -jar TlsCheck.jar
+    ```
+
+    * On success, this message appears:
+
+        ```
+        Successfully connected to TLS 1.2 endpoint.
+        ```
+
+    * On failure, this message appears:
+
+        ```
+        Failed to connect to TLS 1.2 endpoint.
+        ```
+
+#### Supported SDKs
 
 - [PayPal](PayPal/README.md#java)
 - [Braintree](Braintree/README.md#java)
