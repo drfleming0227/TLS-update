@@ -130,7 +130,7 @@ Find OpenSSL in these locations:
 
 1. OpenSSL extension installed in your PHP. Find this in your `php.ini`.
 
-<a id="option-3"></a> 1. OpenSSL used by PHP_CURL.`curl_version()`.
+1. OpenSSL used by PHP_CURL.`curl_version()`. <a id="option-3"></a> 
 
 These OpenSSL extensions can be different, and you update each one separately.
 
@@ -146,7 +146,7 @@ The `php_curl` library uses its own version of the OpenSSL library, which is not
     php -r 'echo json_encode(curl_version(), JSON_PRETTY_PRINT);'
     ```
 
-    The `php_curl` version shown here might be different from the `openssl version`, because they are different components.
+    The returned `php_curl` version might be different from the `openssl version` because they are different components.
 
 1. When you update your OpenSSL libraries, you must update the `php_curl` OpenSSL version, and not the OS OpenSSL version.
 
@@ -168,9 +168,7 @@ The `php_curl` library uses its own version of the OpenSSL library, which is not
 
 These actions help you determine your openssl version.
 
-> **Note:** Make sure that your command line test uses the same versions of PHP and SSL/TLS libraries as your web server
-
-> **Note:** If you are use MAMP or XAMPP as your development set up, the PHP that is packaged with them uses an earlier version of OpenSSL, which you cannot easily update. For more information about this issue and a temporary workaround , see [Unknown SSL protocol error](https://github.com/paypal/PayPal-PHP-SDK/issues/484#issuecomment-176240130).
+> **Notes:** <ul><li>Make sure that your command line test uses the same versions of PHP and SSL/TLS libraries as your web server.</li><li>If you use MAMP or XAMPP as your development set up, the PHP that is packaged with them uses an earlier version of OpenSSL, which you cannot easily update. For more information about this issue and a temporary workaround , see [Unknown SSL protocol error](https://github.com/paypal/PayPal-PHP-SDK/issues/484#issuecomment-176240130).</li></ul>
 
 ### Python
 
