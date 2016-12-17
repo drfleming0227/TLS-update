@@ -30,47 +30,47 @@ These checks assume that you have installed all the libraries required by the Pa
 
 ### Java
 
+#### Java versions and TLS support
+
+**The latest Java (currently 8) is preferred.** In Java 8, TLSv1.2 is the default.
+
+| Java&nbsp;version | TLSv1.2&nbsp;support | Requirements |
+|:--------------|:-----------------|:--------------|
+| 5&nbsp;and&nbsp;earlier | No support | |
+| 6 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>At least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li></ul> |
+| 7 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li><ul> |
+| 8 | Default | <ul><li>No code change is required.</li><li>Make sure that you're using the latest [PayPal SDK](PayPal/README.md#java).</li></ul> |
+
+#### To check Java:
+
 1. Set the TLS version through [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html).
-1. Verify your version of Java.
+1. Verify that Java runtime 6 or later is installed:
 
-    **The latest Java (currently 8) is preferred.** In Java 8, TLSv1.2 is the default.
+    ```
+    java -version
+    ```
 
-    | Java&nbsp;version | TLSv1.2&nbsp;support | Requirements |
-    |:--------------|:-----------------|:--------------|
-    | 5&nbsp;and&nbsp;earlier | No support | |
-    | 6 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>At least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li></ul> |
-    | 7 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li><ul> |
-    | 8 | Default | <ul><li>No code change is required.</li><li>Make sure that you're using the latest [PayPal SDK](PayPal/README.md#java).</li></ul> |
+    If you have Java 5 or earlier, upgrade it. 
 
-    To check Java:
+1. Download [the provided test application](java).
 
-    1. Verify that Java runtime 6 or later is installed:
+1. In a shell on your **production system**, run:
 
-        ```
-        java -version
-        ```
+    ```
+    > java -jar TlsCheck.jar
+    ```
 
-        If you have Java 5 or earlier, upgrade it. 
-
-    1. Download [the provided test application](java).
-
-    1. In a shell on your **production system**, run:
+    * On success, this message appears:
 
         ```
-        > java -jar TlsCheck.jar
+        Successfully connected to TLS 1.2 endpoint.
         ```
 
-        * On success, this message appears:
+    * On failure, this message appears:
 
-            ```
-            Successfully connected to TLS 1.2 endpoint.
-            ```
-
-        * On failure, this message appears:
-
-            ```
-            Failed to connect to TLS 1.2 endpoint.
-            ```
+        ```
+        Failed to connect to TLS 1.2 endpoint.
+        ```
 
 #### Supported SDKs
 
