@@ -1,27 +1,31 @@
 # TLSv1.2 Requirement
 
-The Payment Card Industry (PCI) Council has [mandated](http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls) that early versions of TLS be retired from service.  All organizations that handle credit card information are required to comply with this standard. As part of this obligation, PayPal and Braintree are updating its services to require TLS 1.2 for all HTTPS connections. PayPal and Braintree will also require HTTP/1.1 for all connections.
+The Payment Card Industry Security Standards Council (PCI SSC) [mandates](http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls) that early versions of TLS be retired from service. All organizations that handle credit card information must comply with this standard. As part of this requirement, PayPal and Braintree are updating its services to require TLS 1.2 for all HTTPS connections. PayPal and Braintree will also require HTTP/1.1 for all connections.
 
-You may find more official relevant information at the [PayPal Technical Support website](https://www.paypal-techsupport.com):
+PayPal and Braintree are making this upgrade alongside the rest of the payments industry. **All credit card processors must make these changes** by the PCI deadline, so expect to see similar announcements from other payment providers that you might use.
+
+You can find more official relevant information at the [PayPal Technical Support website](https://www.paypal-techsupport.com):
 * [TLS 1.2 and HTTP/1.1 Upgrade Microsite](https://www.paypal-knowledge.com/infocenter/index?page=content&id=FAQ1914&expand=true&locale=en_US)
 * [2016 Merchant Security Roadmap Microsite](https://www.paypal-knowledge.com/infocenter/index?page=content&id=FAQ1913&expand=true&locale=en_US)
 * [SSL Certificate Upgrade Microsite](https://www.paypal-knowledge.com/infocenter/index?page=content&id=FAQ1766&expand=true&locale=en_US)
 
 ## What does this mean for PayPal and Braintree merchants?
 
-Merchants should verify that all of their systems are capable of using the TLSv1.2 protocol with a SHA-256 certificate. In most cases this means ensuring that you are up to date with security updates, including current versions of operating systems, encryption libraries, and runtime environments.
+Merchants must verify that all their systems can use the TLSv1.2 protocol with a SHA-256 certificate. Make sure that you are up-to-date with security updates including current versions of operating systems, encryption libraries, and runtime environments.
 
-PayPal and Braintree are making this upgrade alongside the rest of the payments industry. **All credit card processors must make these changes** by the PCI deadline, so you should expect to see similar announcements from other payment providers you might use.
+To help merchants get started, we've put together a few notes for common environments. 
 
-To help merchants get started, we've put together a few notes for common environments. These checks assume that you have installed all the libraries required by the PayPal REST and Braintree SDKs. For these checks to be valid, they must be run on a production system or one that *exactly* matches the configuration you have in production.
+### Prerequisites 
+
+These checks assume that you have installed all the libraries required by the PayPal REST and Braintree SDKs. For these checks to be valid, run them on a production system or one that *exactly* matches the production configuration.
 
 ### Java
 
-* The TLS version can be set via [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html).
-* **The latest Java (currently 8) is preferred.** In Java 8, TLSv1.2 is used by default when a TLS version is not specified.
+* Set the TLS version through [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html).
+* **The latest Java (currently 8) is preferred.** In Java 8, TLSv1.2 is the default.
 
-Java version | TLSv1.2 support
---- | ---
+| Java version | TLSv1.2 support |
+|--------------|-----------------|
 5 and earlier | No support.
 6 | Available. TLSv1.2 must be explicitly enabled. Requires at least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).  A [PayPal SDK update](PayPal/README.md#java) or code change may be required.
 7 | Available. TLSv1.2 must be explicitly enabled. A [PayPal SDK update](PayPal/README.md#java) or code change may be required.
@@ -34,6 +38,7 @@ To check Java, first verify that Java runtime 6 or higher is installed by runnin
 - On failure, `Failed to connect to TLS 1.2 endpoint.` is printed.
 
 ##### Supported SDKs
+
 - [PayPal](PayPal/README.md#java)
 - [Braintree](Braintree/README.md#java)
 
@@ -50,6 +55,7 @@ Then, run [TlsCheck](net/TlsCheck) in a shell on your **production system**:
 - On success, `PayPal_Connection_OK` is printed.
 
 ##### Supported SDKs
+
 - [PayPal](PayPal/README.md#net)
 - [Braintree](Braintree/README.md#net)
 
@@ -75,8 +81,8 @@ php -r 'echo json_encode(curl_version(), JSON_PRETTY_PRINT);'
 To check PHP, in a shell on your **production system**:
 
 1. Download [cacert.pem](php/cacert.pem).
-2. Download [TlsCheck.php](php/TlsCheck.php).
-3. Run `php -f TlsCheck.php`.
+1. Download [TlsCheck.php](php/TlsCheck.php).
+1. Run `php -f TlsCheck.php`.
 
 - On success, `PayPal_Connection_OK` is printed.
 - On failure, `curl_error information` will be printed. This will help you determine the openssl version used.
@@ -149,4 +155,4 @@ TLSv1.2 support was introduced in iOS 5. The [PayPal iOS SDK](https://github.com
 
 ### Windows
 
-Neither PayPal, nor Braintree support any Windows SDKs. For a web browser integration, we recommend [Braintree v.zero for JavaScript](https://developers.braintreepayments.com/javascript+dotnet/guides/client-sdk).
+Neither PayPal nor Braintree support any Windows SDKs. For a web browser integration, we recommend [Braintree v.zero for JavaScript](https://developers.braintreepayments.com/javascript+dotnet/guides/client-sdk).
