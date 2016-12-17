@@ -130,8 +130,7 @@ Find OpenSSL in these locations:
 
 1. OpenSSL extension installed in your PHP. Find this in your `php.ini`.
 
-<a id="option-3"></a>
-1. OpenSSL used by PHP_CURL.`curl_version()`.
+<a id="option-3"></a> 1. OpenSSL used by PHP_CURL.`curl_version()`.
 
 These OpenSSL extensions can be different, and you update each one separately.
 
