@@ -45,7 +45,7 @@ These checks assume that you have installed all the libraries required by the Pa
 | 7 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li><ul> |
 | 8 | Default | <ul><li>No code change is required.</li><li>Make sure that you're using the latest [PayPal SDK](PayPal/README.md#java).</li></ul> |
 
-#### To check your Java and TLS versions:
+#### To check your Java and TLS versions
 
 1. Set the TLS version through [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html).
 1. Verify that Java runtime 6 or later is installed:
@@ -80,14 +80,17 @@ These checks assume that you have installed all the libraries required by the Pa
 
 #### Supported SDKs
 
-- [PayPal](PayPal/README.md#java)
-- [Braintree](Braintree/README.md#java)
+* [PayPal](PayPal/README.md#java)
+* [Braintree](Braintree/README.md#java)
 
 ### .NET
 
 You must install the .NET 4.5 or later runtime for TLSv1.2 to be enabled.
 
-#### To check your .NET and TLS versions:
+* [To check your .NET and TLS versions](#to-check-your-net-and-tls-versions)
+* [Supported SDKs](#supported-sdks-net)
+
+#### To check your .NET and TLS versions
 
 1. Set the TLS version through [`ServicePointManager.SecurityProtocol`](https://msdn.microsoft.com/en-us/library/system.net.securityprotocoltype(v=vs.110).aspx).
 
@@ -105,14 +108,19 @@ You must install the .NET 4.5 or later runtime for TLSv1.2 to be enabled.
         PayPal_Connection_OK
         ```
 
+<a id="supported-sdks-net"></a>
+
 #### Supported SDKs
 
-- [PayPal](PayPal/README.md#net)
-- [Braintree](Braintree/README.md#net)
+* [PayPal](PayPal/README.md#net)
+* [Braintree](Braintree/README.md#net)
 
 ### PHP
 
 PHP uses the system-supplied cURL library, which requires OpenSSL 1.0.1c or later. You might also need to [update your SSL/TLS libraries](http://curl.haxx.se/docs/ssl-compared.html).
+
+* [Guidelines](#guidelines)
+* [To check your PHP and TLS versions](#to-check-your-php-and-tls-versions)
 
 #### Guidelines
 
@@ -128,7 +136,7 @@ The one that PayPal or any other PHP SDK uses to make HTTP connections is the on
 
 The `php_curl` library uses its own version of the OpenSSL library, which is not the same version that PHP uses, which is the `openssl.so` file in `php.ini`.
 
-#### To check PHP and TLS versions:
+#### To check your PHP and TLS versions
 
 1. To find the `openssl_version` information for cURL, run:
 
@@ -166,7 +174,9 @@ These actions help you determine your openssl version.
 
 Python uses the system-supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later.
 
-#### To check Python and TLS versions:
+* [To check your Python and TLS versions](#to-check-your-python-and-tls-versions)
+
+#### To check your Python and TLS versions
 
 1. In a shell on your **production system**, run: 
 
@@ -198,9 +208,11 @@ Python uses the system-supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or late
 
 Ruby 2.0.0 or above is required to use TLSv1.2 from the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later. Therefore, both `Ruby > 2.0.0` and `OpenSSL > 1.0.1c` are required. You may also need to run `bundle update` to update your dependencies.
 
-*For the PayPal legacy Ruby SDK (packaged as `PP_Ruby_NVP_SDK.zip`), please download [this update](https://github.com/paypal/TLS-update/blob/master/ruby/PP_Ruby_NVP_SDK.zip).*
+*For the PayPal legacy Ruby SDK (packaged as `PP_Ruby_NVP_SDK.zip`), download [this update](https://github.com/paypal/TLS-update/blob/master/ruby/PP_Ruby_NVP_SDK.zip).*
 
-#### To check Ruby and TLS versions:
+* [To check your Ruby and TLS versions](#to-check-your-ruby-and-tls-versions)
+
+#### To check Ruby and TLS versions
 
 1. In a shell on your **production system**, run:
 
@@ -220,7 +232,9 @@ Ruby 2.0.0 or above is required to use TLSv1.2 from the system supplied OpenSSL.
 
 Node.js uses the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later.
 
-#### To check Node and TLS versions:
+* [To check your Node and TLS versions](#to-check-your-node-and-tls-versions)
+
+#### To check Node and TLS versions
 
 1. In a shell on your **production system**, run:
 
@@ -229,12 +243,17 @@ Node.js uses the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or lat
     ```
 
     * On success:
+        
         ```
         200
         ```
     * On failure, a network error occurs.
 
 ## Native Mobile Apps
+
+* [Android](#android)
+* [iOS](#ios)
+* [Windows](#windows)
 
 ### Android
 
@@ -248,8 +267,8 @@ Users of the PayPal or Braintree Android SDKs should simply update to the latest
 
 #### Supported SDKs
 
-- [PayPal](PayPal/README.md#android)
-- [Braintree](Braintree/README.md#android)
+* [PayPal](PayPal/README.md#android)
+* [Braintree](Braintree/README.md#android)
 
 ### iOS
 
