@@ -30,45 +30,47 @@ These checks assume that you have installed all the libraries required by the Pa
 
 ### Java
 
-* Set the TLS version through [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html).
-* **The latest Java (currently 8) is preferred.** In Java 8, TLSv1.2 is the default.
+1. Set the TLS version through [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html).
+1. Verify your version of Java.
 
-| Java&nbsp;version | TLSv1.2&nbsp;support | Requirements |
-|:--------------|:-----------------|:--------------|
-| 5&nbsp;and&nbsp;earlier | No support | |
-| 6 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>At least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li></ul> |
-| 7 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li><ul> |
-| 8 | Default | <ul><li>No code change is required.</li><li>Make sure that you're using the latest [PayPal SDK](PayPal/README.md#java).</li></ul> |
+    **The latest Java (currently 8) is preferred.** In Java 8, TLSv1.2 is the default.
 
-To check Java:
+    | Java&nbsp;version | TLSv1.2&nbsp;support | Requirements |
+    |:--------------|:-----------------|:--------------|
+    | 5&nbsp;and&nbsp;earlier | No support | |
+    | 6 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>At least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li></ul> |
+    | 7 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li><ul> |
+    | 8 | Default | <ul><li>No code change is required.</li><li>Make sure that you're using the latest [PayPal SDK](PayPal/README.md#java).</li></ul> |
 
-1. Verify that Java runtime 6 or later is installed:
+    To check Java:
 
-    ```
-    java -version
-    ```
-
-    If you have Java 5 or earlier, upgrade it. 
-
-1. Download [the provided test application](java).
-
-1. In a shell on your **production system**, run:
-
-    ```
-    > java -jar TlsCheck.jar
-    ```
-
-    * On success, this message appears:
+    1. Verify that Java runtime 6 or later is installed:
 
         ```
-        Successfully connected to TLS 1.2 endpoint.
+        java -version
         ```
 
-    * On failure, this message appears:
+        If you have Java 5 or earlier, upgrade it. 
+
+    1. Download [the provided test application](java).
+
+    1. In a shell on your **production system**, run:
 
         ```
-        Failed to connect to TLS 1.2 endpoint.
+        > java -jar TlsCheck.jar
         ```
+
+        * On success, this message appears:
+
+            ```
+            Successfully connected to TLS 1.2 endpoint.
+            ```
+
+        * On failure, this message appears:
+
+            ```
+            Failed to connect to TLS 1.2 endpoint.
+            ```
 
 #### Supported SDKs
 
@@ -78,54 +80,73 @@ To check Java:
 ### .NET
 
 The .NET 4.5 (or greater) runtime must be installed for TLSv1.2 to be enabled.
-  * The TLS version can be set via [`ServicePointManager.SecurityProtocol`](https://msdn.microsoft.com/en-us/library/system.net.securityprotocoltype(v=vs.110).aspx).
+  
+1. Set the TLS version through [`ServicePointManager.SecurityProtocol`](https://msdn.microsoft.com/en-us/library/system.net.securityprotocoltype(v=vs.110).aspx).
 
-To check .NET, first verify you have .NET framework 4.5 or later by running [NetFrameworkVersions](net/NetFrameworkVersions) on the console of your production system. If you do not have .NET 4.5 or above, please upgrade it first.
+1. To verify that you have .NET framework 4.5 or later, run [NetFrameworkVersions](net/NetFrameworkVersions) on the console of your production system. If you do not have .NET 4.5 or above, upgrade it.
 
-Then, run [TlsCheck](net/TlsCheck) in a shell on your **production system**:
-`> TlsCheck.exe`
+1. In a shell on your **production system**, run [TlsCheck](net/TlsCheck):
 
-- On success, `PayPal_Connection_OK` is printed.
+    ```
+    > TlsCheck.exe
+    ```
 
-##### Supported SDKs
+    * On success, this message appears:
+
+    ```
+    PayPal_Connection_OK
+    ```
+
+#### Supported SDKs
 
 - [PayPal](PayPal/README.md#net)
 - [Braintree](Braintree/README.md#net)
 
 ### PHP
 
-PHP uses the system supplied curl library. The curl library requires OpenSSL `1.0.1c` or later. You may also need to [update your SSL/TLS libraries](http://curl.haxx.se/docs/ssl-compared.html).
+PHP uses the system supplied cURL library, which requires OpenSSL `1.0.1c` or later. You might also need to [update your SSL/TLS libraries](http://curl.haxx.se/docs/ssl-compared.html).
 
 > NOTE:
-- There are three places where you will find OpenSSL:
-    - OpenSSL installed in your Operating System `openssl version`.
-    - OpenSSL extension installed in your PHP.  This can be found in your `php.ini`.
-    - OpenSSL used by PHP_CURL. `curl_version()`.
-- All these three OpenSSL extensions can be different, and can be updated separately.
-- The one PayPal or any other PHP SDK uses to make HTTP connections is the PHP_CURL (option 3). PHP_CURL OpenSSL is the one that needs to support TLSv1.2.
-- `php_curl` library uses its own version of OpenSSL library, which is not the same as one used by PHP (`openssl.so` file that is  in `php.ini`).
-- the openssl_version information of curl can be found by running 
-```
-php -r 'echo json_encode(curl_version(), JSON_PRETTY_PRINT);'
-```
-- The `php_curl` version shown here could be different from the `openssl version`, as they are two different components.
-- Please keep in mind when updating your OpenSSL libraries, you need to update `php_curl` OpenSSL version and not the OS OpenSSL version.
+* Find OpenSSL in these places:
+    * OpenSSL installed in your Operating System `openssl version`.
+    * OpenSSL extension installed in your PHP.  This can be found in your `php.ini`.
+    * OpenSSL used by PHP_CURL. `curl_version()`.
+* These OpenSSL extensions can be different, and you can update each separately.
+* The one PayPal or any other PHP SDK uses to make HTTP connections is the PHP_CURL (option 3). The PHP_CURL OpenSSL must support TLSv1.2.
+* `php_curl` library uses its own version of the OpenSSL library, which is not the same version as the one that PHP uses (`openssl.so` file that is  in `php.ini`).
+* To find the `openssl_version` information for cURL, run:
+    ```
+    php -r 'echo json_encode(curl_version(), JSON_PRETTY_PRINT);'
+    ```
+* The `php_curl` version shown here could be different from the `openssl version`, as they are two different components.
+* When you update your OpenSSL libraries, you must update `php_curl` OpenSSL version and not the OS OpenSSL version.
 
-To check PHP, in a shell on your **production system**:
+To check PHP:
+
+In a shell on your **production system**:
 
 1. Download [cacert.pem](php/cacert.pem).
 1. Download [TlsCheck.php](php/TlsCheck.php).
 1. Run `php -f TlsCheck.php`.
 
-- On success, `PayPal_Connection_OK` is printed.
-- On failure, `curl_error information` will be printed. This will help you determine the openssl version used.
+    * On success:
+        ```
+        PayPal_Connection_OK
+        ```
+    
+    * On failure:
+        ```
+        curl_error information
+        ```
 
-> **Note:** Please make sure that your command line test is using the same versions of PHP & SSL/TLS libraries as your web server
+This will help you determine the openssl version used.
+
+> **Note:** Make sure that your command line test uses the same versions of PHP and SSL/TLS libraries as your web server
 > **Note:** If you are using MAMP or XAMPP as your development setup, currently the PHP packaged with them comes with a lower version of OpenSSL, which currently cannot be updated easily. You can find more information on this issue and find a temporary workaround [here](https://github.com/paypal/PayPal-PHP-SDK/issues/484#issuecomment-176240130)
 
 ### Python
 
-Python uses the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later.
+Python uses the system-supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later.
 
 To check Python, in a shell on your **production system**, run: 
 
@@ -148,12 +169,21 @@ Ruby 2.0.0 or above is required to use TLSv1.2 from the system supplied OpenSSL.
 
 *For the PayPal legacy Ruby SDK (packaged as `PP_Ruby_NVP_SDK.zip`), please download [this update](https://github.com/paypal/TLS-update/blob/master/ruby/PP_Ruby_NVP_SDK.zip).*
 
-To check Ruby, in a shell on your **production system**, run:
+To check Ruby:
 
-`$ ruby -r'net/http' -e 'puts Net::HTTP.get(URI("https://tlstest.paypal.com/"))'`
+1. In a shell on your **production system**, run:
 
-- On success, `PayPal_Connection_OK` will be printed.
-- On failure, a `OpenSSL::SSL::SSLError` or `EOFError` will be thrown.
+    ```
+    $ ruby -r'net/http' -e 'puts Net::HTTP.get(URI("https://tlstest.paypal.com/"))'
+    ```
+
+        * On success:
+    
+            ```
+            PayPal_Connection_OK
+            ```
+
+        * On failure, a `OpenSSL::SSL::SSLError` or `EOFError` is thrown.
 
 ### Node.js
 
@@ -163,8 +193,11 @@ To check Node, in a shell on your **production system**, run:
 
 `$ node -e "var https = require('https'); https.get('https://tlstest.paypal.com/', function(res){ console.log(res.statusCode) });"`
 
-- On success, 200 is printed.
-- On failure, a network error is printed.
+* On success:
+    ```
+    200
+    ```
+* On failure, a network error occurs.
 
 ## Native Mobile Apps
 
