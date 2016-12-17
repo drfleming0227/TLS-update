@@ -11,7 +11,7 @@ For more official, relevant information, see the [PayPal Technical Support websi
 
 ## What does this mean for PayPal and Braintree merchants?
 
-Merchants must verify that all their systems can use the TLSv1.2 protocol with a SHA-256 certificate. Make sure that you are up-to-date with security updates including current versions of operating systems, encryption libraries, and runtime environments.
+Merchants must verify that their systems can use the TLSv1.2 protocol with a SHA-256 certificate. As a merchant, you must make sure that you are up-to-date with security updates including current versions of operating systems, encryption libraries, and runtime environments.
 
 To get started, use the following notes to check the TLSv1.2 readiness for your environments:
 
@@ -36,7 +36,7 @@ These checks assume that you have installed all the libraries required by the Pa
 
 | Java&nbsp;version | TLSv1.2&nbsp;support | Requirements |
 |:--------------|:-----------------|:--------------|
-| 5&nbsp;and&nbsp;earlier | No support | Upgrade to Java 6 or later. |
+| 5&nbsp;and&nbsp;earlier | No support | Upgrade to Java 6 or later.<blockquote><strong>Note:</strong> Java 8 is preferred because TLSv1.2 is the default in this Java version.</blockquote> |
 | 6 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>At least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li></ul> |
 | 7 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li><ul> |
 | 8 | Default | <ul><li>No code change is required.</li><li>Make sure that you're using the latest [PayPal SDK](PayPal/README.md#java).</li></ul> |
@@ -60,13 +60,13 @@ These checks assume that you have installed all the libraries required by the Pa
     > java -jar TlsCheck.jar
     ```
 
-    * On success, this message appears:
+    * On success:
 
         ```
         Successfully connected to TLS 1.2 endpoint.
         ```
 
-    * On failure, this message appears:
+    * On failure:
 
         ```
         Failed to connect to TLS 1.2 endpoint.
@@ -79,11 +79,13 @@ These checks assume that you have installed all the libraries required by the Pa
 
 ### .NET
 
-The .NET 4.5 (or greater) runtime must be installed for TLSv1.2 to be enabled.
-  
+You must install the .NET 4.5 or later runtime for TLSv1.2 to be enabled.
+
+#### To check your .NET and TLS versions:
+
 1. Set the TLS version through [`ServicePointManager.SecurityProtocol`](https://msdn.microsoft.com/en-us/library/system.net.securityprotocoltype(v=vs.110).aspx).
 
-1. To verify that you have .NET framework 4.5 or later, run [NetFrameworkVersions](net/NetFrameworkVersions) on the console of your production system. If you do not have .NET 4.5 or above, upgrade it.
+1. To verify that you have .NET framework 4.5 or later, run [NetFrameworkVersions](net/NetFrameworkVersions) on the console of your production system. If you do not have .NET 4.5 or later, upgrade it.
 
 1. In a shell on your **production system**, run [TlsCheck](net/TlsCheck):
 
@@ -91,7 +93,7 @@ The .NET 4.5 (or greater) runtime must be installed for TLSv1.2 to be enabled.
     > TlsCheck.exe
     ```
 
-    * On success, this message appears:
+    * On success:
 
     ```
     PayPal_Connection_OK
@@ -104,24 +106,24 @@ The .NET 4.5 (or greater) runtime must be installed for TLSv1.2 to be enabled.
 
 ### PHP
 
-PHP uses the system supplied cURL library, which requires OpenSSL `1.0.1c` or later. You might also need to [update your SSL/TLS libraries](http://curl.haxx.se/docs/ssl-compared.html).
+PHP uses the system-supplied cURL library, which requires OpenSSL 1.0.1c or later. You might also need to [update your SSL/TLS libraries](http://curl.haxx.se/docs/ssl-compared.html).
 
-> NOTE:
-* Find OpenSSL in these places:
-    * OpenSSL installed in your Operating System `openssl version`.
-    * OpenSSL extension installed in your PHP.  This can be found in your `php.ini`.
-    * OpenSSL used by PHP_CURL. `curl_version()`.
-* These OpenSSL extensions can be different, and you can update each separately.
-* The one PayPal or any other PHP SDK uses to make HTTP connections is the PHP_CURL (option 3). The PHP_CURL OpenSSL must support TLSv1.2.
-* `php_curl` library uses its own version of the OpenSSL library, which is not the same version as the one that PHP uses (`openssl.so` file that is  in `php.ini`).
-* To find the `openssl_version` information for cURL, run:
-    ```
-    php -r 'echo json_encode(curl_version(), JSON_PRETTY_PRINT);'
-    ```
-* The `php_curl` version shown here could be different from the `openssl version`, as they are two different components.
-* When you update your OpenSSL libraries, you must update `php_curl` OpenSSL version and not the OS OpenSSL version.
+> **Notes:**
+> * Find OpenSSL in these places:
+>     * OpenSSL installed in your Operating System `openssl version`.
+>     * OpenSSL extension installed in your PHP.  This can be found in your `php.ini`.
+>     * OpenSSL used by PHP_CURL. `curl_version()`.
+> * These OpenSSL extensions can be different, and you can update each separately.
+> * The one PayPal or any other PHP SDK uses to make HTTP connections is the PHP_CURL (option 3). The PHP_CURL OpenSSL must support TLSv1.2.
+> * `php_curl` library uses its own version of the OpenSSL library, which is not the same version as the one that PHP uses (`openssl.so` file that is  in `php.ini`).
+> * To find the `openssl_version` information for cURL, run:
+>     ```
+>     php -r 'echo json_encode(curl_version(), JSON_PRETTY_PRINT);'
+>     ```
+> * The `php_curl` version shown here could be different from the `openssl version`, as they are two different components.
+> * When you update your OpenSSL libraries, you must update `php_curl` OpenSSL version and not the OS OpenSSL version.
 
-To check PHP:
+#### To check PHP and TLS versions:
 
 In a shell on your **production system**:
 
@@ -139,10 +141,11 @@ In a shell on your **production system**:
         curl_error information
         ```
 
-This will help you determine the openssl version used.
+These actions help you determine your openssl version.
 
 > **Note:** Make sure that your command line test uses the same versions of PHP and SSL/TLS libraries as your web server
-> **Note:** If you are using MAMP or XAMPP as your development setup, currently the PHP packaged with them comes with a lower version of OpenSSL, which currently cannot be updated easily. You can find more information on this issue and find a temporary workaround [here](https://github.com/paypal/PayPal-PHP-SDK/issues/484#issuecomment-176240130)
+
+> **Note:** If you are use MAMP or XAMPP as your development set up, the PHP that is packaged with them uses an earlier version of OpenSSL, which you cannot easily update. For more information about this issue and a temporary workaround , see [Unknown SSL protocol error](https://github.com/paypal/PayPal-PHP-SDK/issues/484#issuecomment-176240130).
 
 ### Python
 
