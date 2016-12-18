@@ -28,7 +28,7 @@ To get started, use the following notes to verify the TLSv1.2 readiness in your 
 
 ### Prerequisites 
 
-* These checks assume that you have installed all libraries that the PayPal REST and Braintree SDKs require. 
+* These checks assume that you have installed all PayPal REST- and Braintree SDK-required libraries. 
 * For these checks to be valid, run them on a production system or one that *exactly* matches the production configuration.
 
 * * *
@@ -146,14 +146,12 @@ To enable TLSv1.2, you must install the .NET framework 4.5 or later.
 Find OpenSSL in these locations:
 
 1. OpenSSL installed in your operating system's `openssl version`.
-
 1. OpenSSL extension installed in your PHP. Find this in your `php.ini`.
-
 1. OpenSSL used by PHP_CURL.`curl_version()`. <a id="option-3"></a> 
 
 These OpenSSL extensions can be different, and you update each one separately.
 
-The OpenSSL extension that PayPal or any other PHP SDK uses to make HTTP connections is the one that [PHP_CURL](#option-3) uses. The PHP_CURL OpenSSL extension must support TLSv1.2.
+PayPal and other PHP SDKs use the same OpenSSL extension that [PHP_CURL](#option-3) uses to make HTTP connections. The PHP_CURL OpenSSL extension must support TLSv1.2.
 
 The `php_curl` library uses its own version of the OpenSSL library, which is not the same version that PHP uses, which is the `openssl.so` file in `php.ini`.
 
