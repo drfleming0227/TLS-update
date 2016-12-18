@@ -11,7 +11,7 @@ For more official, relevant information, see the [PayPal Technical Support websi
 
 ## What does this mean for PayPal and Braintree merchants?
 
-Merchants must verify that their systems can use the TLSv1.2 protocol with a SHA-256 certificate. As a merchant, you must make sure that you are up-to-date with security updates including current versions of operating systems, encryption libraries, and runtime environments.
+Merchants must verify that their systems can use the TLSv1.2 protocol with a SHA-256 certificate. As a merchant, you must make sure that you are up-to-date with security updates, including current versions of operating systems, encryption libraries, and runtime environments.
 
 To get started, use the following notes to verify the TLSv1.2 readiness in your environments:
 
@@ -165,13 +165,13 @@ The `php_curl` library uses its own version of the OpenSSL library, which is not
 
     The returned `php_curl` version might be different from the `openssl version` because they are different components.
 
-1. When you update your OpenSSL libraries, you must update the `php_curl` OpenSSL version, and not the OS OpenSSL version.
+1. When you update your OpenSSL libraries, you must update the `php_curl` OpenSSL version and not the OS OpenSSL version.
 
-1. In a shell on your **production system**:
+1. In a shell on your **production system**, download [cacert.pem](php/cacert.pem) and [TlsCheck.php](php/TlsCheck.php). Then, run this command:
 
-    1. Download [cacert.pem](php/cacert.pem).
-    1. Download [TlsCheck.php](php/TlsCheck.php).
-    1. Run `php -f TlsCheck.php`.
+        ```
+        php -f TlsCheck.php
+        ```
 
         * On success:
             ```
