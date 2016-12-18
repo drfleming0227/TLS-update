@@ -13,7 +13,7 @@ For more official, relevant information, see the [PayPal Technical Support websi
 
 Merchants must verify that their systems can use the TLSv1.2 protocol with a SHA-256 certificate. As a merchant, you must make sure that you are up-to-date with security updates including current versions of operating systems, encryption libraries, and runtime environments.
 
-To get started, use the following notes to verify the TLSv1.2 readiness for your environments:
+To get started, use the following notes to verify the TLSv1.2 readiness in your environments:
 
 * [Prerequisites](#prerequisites)
 * [Java](#java)
@@ -24,10 +24,14 @@ To get started, use the following notes to verify the TLSv1.2 readiness for your
 * [Node](#node)
 * [Native Mobile Apps](#native-mobile-apps)
 
+* * *
+
 ### Prerequisites 
 
 * These checks assume that you have installed all libraries that the PayPal REST and Braintree SDKs require. 
 * For these checks to be valid, run them on a production system or one that *exactly* matches the production configuration.
+
+* * *
 
 ### Java
 
@@ -87,6 +91,8 @@ To get started, use the following notes to verify the TLSv1.2 readiness for your
 * [PayPal](PayPal/README.md#java)
 * [Braintree](Braintree/README.md#java)
 
+* * *
+
 ### .NET
 
 * [.NET requirements](#net-requirements)
@@ -121,6 +127,8 @@ To enable TLSv1.2, you must install the .NET framework 4.5 or later.
 
 * [PayPal](PayPal/README.md#net)
 * [Braintree](Braintree/README.md#net)
+
+* * *
 
 ### PHP
 
@@ -181,6 +189,8 @@ These actions help you determine your openssl version.
 
 > **Notes:** <ul><li>Make sure that your command line test uses the same versions of PHP and SSL/TLS libraries as your web server.</li><li>If you use MAMP or XAMPP as your development set up, the PHP that is packaged with them uses an earlier version of OpenSSL, which you cannot easily update. For more information about this issue and a temporary workaround , see [Unknown SSL protocol error](https://github.com/paypal/PayPal-PHP-SDK/issues/484#issuecomment-176240130).</li></ul>
 
+* * *
+
 ### Python
 
 * [Python requirements](#python-requirements)
@@ -218,6 +228,7 @@ These actions help you determine your openssl version.
         ```
         urllib2.URLError: <urlopen error [Errno 54] Connection reset by peer>
         ```
+* * *
 
 ### Ruby
 
@@ -249,6 +260,8 @@ These actions help you determine your openssl version.
 
         * On failure, a `OpenSSL::SSL::SSLError` or `EOFError` is thrown.
 
+* * *
+
 ### Node
 
 * [Node requirements](#node-requirements)
@@ -273,6 +286,8 @@ These actions help you determine your openssl version.
         200
         ```
     * On failure, a network error occurs.
+
+* * *
 
 ## Native Mobile Apps
 
