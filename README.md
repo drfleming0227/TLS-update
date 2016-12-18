@@ -189,7 +189,7 @@ The `php_curl` library uses its own version of the OpenSSL library, which is not
 
 These actions help you determine your openssl version.
 
-> **Notes:** <ul><li>Make sure that your command line test uses the same versions of PHP and SSL/TLS libraries as your web server.</li><li>If you use MAMP or XAMPP as your development set up, the PHP that is packaged with them uses an earlier version of OpenSSL, which you cannot easily update. For more information about this issue and a temporary workaround , see [Unknown SSL protocol error](https://github.com/paypal/PayPal-PHP-SDK/issues/484#issuecomment-176240130).</li></ul>
+> **Notes:** <ul><li>Make sure that your command line test uses the same versions of PHP and SSL/TLS libraries as your web server.</li><li>If you use MAMP or XAMPP as your development set up, the PHP that is packaged with them uses an earlier version of OpenSSL, which you cannot easily update. For more information about this issue and a temporary workaround, see [Unknown SSL protocol error](https://github.com/paypal/PayPal-PHP-SDK/issues/484#issuecomment-176240130).</li></ul>
 
 * * *
 
@@ -205,31 +205,32 @@ These actions help you determine your openssl version.
 
 #### To verify your Python and TLS versions
 
-1. In a shell on your **production system**, run: 
+1. In a shell on your **production system**, run the command for your environment: 
 
-    For Python 2.x:
+    * For Python 2.x:
 
-    ```
-    $ python -c "import urllib2; print(urllib2.urlopen('https://tlstest.paypal.com/').read())"
-    ```
+        ```
+        $ python -c "import urllib2; print(urllib2.urlopen('https://tlstest.paypal.com/').read())"
+        ```
 
-    For Python 3.x:
+    * For Python 3.x:
 
-    ```
-    $ python -c "import urllib.request; print(urllib.request.urlopen('https://tlstest.paypal.com/').read())"
-    ```
+        ```
+        $ python -c "import urllib.request; print(urllib.request.urlopen('https://tlstest.paypal.com/').read())"
+        ```
 
-    * On success:
-        ```
-        PayPal_Connection_OK
-        ```
-    * On failure, an `URLError` is raised:
-        ```
-        urllib2.URLError: <urlopen error EOF occurred in violation of protocol (_ssl.c:590)>
-        ```
-        ```
-        urllib2.URLError: <urlopen error [Errno 54] Connection reset by peer>
-        ```
+        * On success:
+            
+            ```
+            PayPal_Connection_OK
+            ```
+        
+        * On failure, an `URLError` is raised:
+            
+            ```
+            urllib2.URLError: <urlopen error EOF occurred in violation of protocol (_ssl.c:590)>
+            urllib2.URLError: <urlopen error [Errno 54] Connection reset by peer>
+            ```
 * * *
 
 ### Ruby
@@ -239,9 +240,11 @@ These actions help you determine your openssl version.
 
 #### Ruby requirements
 
-* Both `Ruby > 2.0.0` and `OpenSSL > 1.0.1c` are required:
+* Ruby 2.0.0 or later and OpenSSL 1.0.1c or later are required:
+    
     * Ruby 2.0.0 or later is required to use TLSv1.2 from the system-supplied OpenSSL.
-    * TLSv1.2 requires OpenSSL 1.0.1c or later. 
+    * TLSv1.2 requires OpenSSL 1.0.1c or later.
+     
 * To update your dependencies, you might need to run `bundle update`.
 
 #### To verify Ruby and TLS versions
