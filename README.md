@@ -1,8 +1,8 @@
 # TLSv1.2 Requirement
 
-The Payment Card Industry Security Standards Council (PCI SSC) [mandates](http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls) that early versions of TLS be retired from service. **All credit card processors must make these changes** by the PCI deadline, so expect to see similar announcements from other payment providers that you might use. As part of this requirement, PayPal and Braintree are making this upgrade alongside the rest of the payments industry. 
+The Payment Card Industry Security Standards Council (PCI SSC) [mandates](http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls) that **all credit card processors must retire early versions of TLS from service by the PCI deadline**. 
 
-PayPal and Braintree are updating its services to require TLS 1.2 for all HTTPS connections. PayPal and Braintree will also require HTTP/1.1 for all connections.
+As part of this requirement, PayPal and Braintree are making this upgrade alongside the rest of the payments industry. PayPal and Braintree are updating its services to require TLS 1.2 for all HTTPS connections. PayPal and Braintree will also require HTTP/1.1 for all connections.
 
 For more official, relevant information, see the [PayPal Technical Support website](https://www.paypal-techsupport.com):
 * [TLS 1.2 and HTTP/1.1 Upgrade Microsite](https://www.paypal-knowledge.com/infocenter/index?page=content&id=FAQ1914&expand=true&locale=en_US)
