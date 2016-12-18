@@ -13,7 +13,7 @@ For more official, relevant information, see the [PayPal Technical Support websi
 
 Merchants must verify that their systems can use the TLSv1.2 protocol with a SHA-256 certificate. As a merchant, you must make sure that you are up-to-date with security updates including current versions of operating systems, encryption libraries, and runtime environments.
 
-To get started, use the following notes to check the TLSv1.2 readiness for your environments:
+To get started, use the following notes To verify the TLSv1.2 readiness for your environments:
 
 * [Prerequisites](#prerequisites)
 * [Java](#java)
@@ -30,11 +30,11 @@ These checks assume that you have installed all the libraries required by the Pa
 
 ### Java
 
-* [Java versions and TLS support](#java-versions-and-tls-support)
-* [To check Java and TLS versions](#to-check-java-and-tls-versions)
+* [Java requirements](#java-requirements)
+* [To verify Java and TLS versions](#to-verify-java-and-tls-versions)
 * [Supported SDKs](#supported-sdks-java)
 
-#### Java versions and TLS support
+#### Java requirements
 
 > **Note:** Java 8 is preferred because TLSv1.2 is the default in this Java version.
 
@@ -45,7 +45,7 @@ These checks assume that you have installed all the libraries required by the Pa
 | 7 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li><ul> |
 | 8 | Default | <ul><li>No code change is required.</li><li>Make sure that you're using the latest [PayPal SDK](PayPal/README.md#java).</li></ul> |
 
-#### To check your Java and TLS versions
+#### To verify your Java and TLS versions
 
 1. Set the TLS version through the [`SSLContext`](http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLContext.html) class.
 
@@ -55,11 +55,11 @@ These checks assume that you have installed all the libraries required by the Pa
     java -version
     ```
 
-    If you have Java 5 or earlier, upgrade it. 
+    If your Java version is 5 or earlier, upgrade it. 
 
     > **Note:** Java 8 is preferred because TLSv1.2 is the default in this Java version.
 
-1. Download the [TLS update](java).
+1. Download the Java [TLS update](java) files.
 
 1. In a shell on your **production system**, run:
 
@@ -88,12 +88,15 @@ These checks assume that you have installed all the libraries required by the Pa
 
 ### .NET
 
-You must install the .NET 4.5 or later runtime for TLSv1.2 to be enabled.
-
-* [To check your .NET and TLS versions](#to-check-your-net-and-tls-versions)
+* [.NET requirements](#net-requirements)
+* [To verify your .NET and TLS versions](#to-verify-your-net-and-tls-versions)
 * [Supported SDKs](#supported-sdks-net)
 
-#### To check your .NET and TLS versions
+#### .NET requirements
+
+To enable TLSv1.2, you must install the .NET runtime 4.5 or later.
+
+#### To verify your .NET and TLS versions
 
 1. Set the TLS version through [`ServicePointManager.SecurityProtocol`](https://msdn.microsoft.com/en-us/library/system.net.securityprotocoltype(v=vs.110).aspx).
 
@@ -120,10 +123,14 @@ You must install the .NET 4.5 or later runtime for TLSv1.2 to be enabled.
 
 ### PHP
 
-PHP uses the system-supplied cURL library, which requires OpenSSL 1.0.1c or later. You might also need to [update your SSL/TLS libraries](http://curl.haxx.se/docs/ssl-compared.html).
-
+* [PHP requirements](#php-requirements)
 * [Guidelines](#guidelines)
-* [To check your PHP and TLS versions](#to-check-your-php-and-tls-versions)
+* [To verify your PHP and TLS versions](#to-verify-your-php-and-tls-versions)
+
+#### PHP requirements
+
+* PHP uses the system-supplied cURL library, which requires OpenSSL 1.0.1c or later. 
+* You might also need to [update your SSL/TLS libraries](http://curl.haxx.se/docs/ssl-compared.html).
 
 #### Guidelines
 
@@ -141,7 +148,7 @@ The one that PayPal or any other PHP SDK uses to make HTTP connections is the on
 
 The `php_curl` library uses its own version of the OpenSSL library, which is not the same version that PHP uses, which is the `openssl.so` file in `php.ini`.
 
-#### To check your PHP and TLS versions
+#### To verify your PHP and TLS versions
 
 1. To find the `openssl_version` information for cURL, run:
 
@@ -175,11 +182,15 @@ These actions help you determine your openssl version.
 
 ### Python
 
-Python uses the system-supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later.
+* [Python requirements](#python-requirements)
+* [To verify your Python and TLS versions](#to-verify-your-python-and-tls-versions)
 
-* [To check your Python and TLS versions](#to-check-your-python-and-tls-versions)
+#### Python requirements
 
-#### To check your Python and TLS versions
+* Python uses the system-supplied OpenSSL. 
+* TLSv1.2 requires OpenSSL 1.0.1c or later.
+
+#### To verify your Python and TLS versions
 
 1. In a shell on your **production system**, run: 
 
@@ -209,13 +220,17 @@ Python uses the system-supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or late
 
 ### Ruby
 
-Ruby 2.0.0 or later is required to use TLSv1.2 from the system-supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later. 
+* [Ruby requirements](#ruby-requirements)
+* [To verify your Ruby and TLS versions](#to-verify-your-ruby-and-tls-versions)
 
-Therefore, both `Ruby > 2.0.0` and `OpenSSL > 1.0.1c` are required. You might also need to run `bundle update` to update your dependencies.
+#### Ruby requirements
 
-* [To check your Ruby and TLS versions](#to-check-your-ruby-and-tls-versions)
+* Both `Ruby > 2.0.0` and `OpenSSL > 1.0.1c` are required:
+    * Ruby 2.0.0 or later is required to use TLSv1.2 from the system-supplied OpenSSL.
+    * TLSv1.2 requires OpenSSL 1.0.1c or later. 
+* To update your dependencies, you might need to run `bundle update`.
 
-#### To check Ruby and TLS versions
+#### To verify Ruby and TLS versions
 
 1. For the PayPal legacy Ruby SDK, packaged as `PP_Ruby_NVP_SDK.zip`, download [this update](https://github.com/paypal/TLS-update/blob/master/ruby/PP_Ruby_NVP_SDK.zip).
 
@@ -235,11 +250,15 @@ Therefore, both `Ruby > 2.0.0` and `OpenSSL > 1.0.1c` are required. You might al
 
 ### Node
 
-Node.js uses the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or later.
+* [Node requirements](#node-requirements)
+* [To verify your Node and TLS versions](#to-verify-your-node-and-tls-versions)
 
-* [To check your Node and TLS versions](#to-check-your-node-and-tls-versions)
+#### Node requirements
 
-#### To check Node and TLS versions
+* Node.js uses the system supplied OpenSSL.
+* TLSv1.2 requires OpenSSL 1.0.1c or later.
+
+#### To verify Node and TLS versions
 
 1. In a shell on your **production system**, run:
 
@@ -262,13 +281,20 @@ Node.js uses the system supplied OpenSSL. TLSv1.2 requires OpenSSL 1.0.1c or lat
 
 ### Android
 
-TLSv1.2 was made default for client connections in API 20 (Android 4.4W "KitKat - wearable extensions").
+* [Android requirements](#android-requirements)
+* [Supported SDKs](#supported-sdks-android)
 
-All Android app developers will want to make sure their code and PayPal or Braintree SDKs provide explicit support for TLSv1.2. Apps should be tested on Android 4.1-4.4 (API 16-19) devices to verify correct implementation.
+#### Android requirements
 
-After the TLSv1.2 upgrade, native app support for user devices older than API 16 (Android 4.1 "Jelly Bean") will not be available. Fortunately, as of December 5, 2016, [Google reports 2.5% of devices accessing the Play store are API 15 or earlier](http://developer.android.com/about/dashboards/index.html#Platform).
+TLSv1.2 is the default for client connections in API 20 (Android 4.4W "KitKat - wearable extensions").
 
-Users of the PayPal or Braintree Android SDKs should simply update to the latest version. Outside of the SDK, we have provided [an example Android app](android/) to illustrate how to support TLSv1.2.
+All Android app developers must make sure that their code and PayPal or Braintree SDKs provide explicit support for TLSv1.2. To verify correct implementation, test apps on Android 4.1-4.4 (API 16-19) devices.
+
+After the TLSv1.2 upgrade, native app support for user devices earlier than API 16 (Android 4.1 "Jelly Bean") are not available. Fortunately, as of December 5, 2016, [Google reports 2.5% of devices accessing the Play store are API 15 or earlier](http://developer.android.com/about/dashboards/index.html#Platform).
+
+Users of the PayPal or Braintree Android SDKs must update to the latest version. To illustrate how to support TLSv1.2 outside of the SDK, we have provided an [example Android app](android/).
+
+<a id="supported-sdks-android"></a>
 
 #### Supported SDKs
 
