@@ -46,8 +46,8 @@ To get started, use the following notes to verify the TLSv1.2 readiness in your 
 | Java&nbsp;version | TLSv1.2&nbsp;support | Requirements |
 |:--------------|:-----------------|:--------------|
 | 5&nbsp;and&nbsp;earlier | No support | <p>Upgrade to Java 6 or later.</p><blockquote><strong>Note:</strong> Java 8 is preferred because TLSv1.2 is the default in this Java version.</blockquote> |
-| 6 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>At least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li></ul> |
-| 7 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>A [PayPal SDK update](PayPal/README.md#java) or code change might be required.</li><ul> |
+| 6 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>At least [Oracle Java version `6u115 b32`](http://www.oracle.com/technetwork/java/javase/documentation/overview-156328.html) or [IBM V6 service refresh 10](http://www-01.ibm.com/support/knowledgecenter/SSYKE2_6.0.0/com.ibm.java.security.component.60.doc/security-component/jsse2Docs/overrideSSLprotocol.html).</li><li>You might require a [PayPal SDK update](PayPal/README.md#java) or code change.</li></ul> |
+| 7 | Available | <ul><li>You must explicitly enable TLSv1.2.</li><li>You might require a [PayPal SDK update](PayPal/README.md#java) or code change.</li><ul> |
 | 8 | Default | <ul><li>No code change is required.</li><li>Make sure that you're using the latest [PayPal SDK](PayPal/README.md#java).</li></ul> |
 
 #### To verify your Java and TLS versions
@@ -187,8 +187,6 @@ The `php_curl` library uses its own version of the OpenSSL library, which is not
         curl_error information
         ```
 
-These actions help you determine your openssl version.
-
 > **Notes:** <ul><li>Make sure that your command line test uses the same versions of PHP and SSL/TLS libraries that your web server uses.</li><li>If you use MAMP or XAMPP as your development set up, the PHP that is packaged with them uses an earlier version of OpenSSL, which you cannot easily update. For more information about this issue and a temporary workaround, see [Unknown SSL protocol error](https://github.com/paypal/PayPal-PHP-SDK/issues/484#issuecomment-176240130).</li></ul>
 
 * * *
@@ -250,7 +248,7 @@ These actions help you determine your openssl version.
 
 #### To verify Ruby and TLS versions
 
-1. For the PayPal legacy Ruby SDK, packaged as `PP_Ruby_NVP_SDK.zip`, download this [PP_Ruby_NVP_SDK.zip](https://github.com/paypal/TLS-update/blob/master/ruby/PP_Ruby_NVP_SDK.zip).
+1. For the PayPal legacy Ruby SDK packaged as `PP_Ruby_NVP_SDK.zip`, download this [PP_Ruby_NVP_SDK.zip](https://github.com/paypal/TLS-update/blob/master/ruby/PP_Ruby_NVP_SDK.zip).
 
 1. In a shell on your **production system**, run:
 
@@ -310,7 +308,7 @@ These actions help you determine your openssl version.
 
 TLSv1.2 is the default for client connections in API 20 (Android 4.4W or `KITKAT` - wearable extensions).
 
-All Android app developers must make sure that their code and PayPal or Braintree SDKs provide explicit support for TLSv1.2. To verify correct implementation, test apps on Android 4.1-4.4 (API 16-19) devices.
+All Android app developers must make sure that their code and PayPal or Braintree SDKs provide explicit support for TLSv1.2. To verify correct implementation, test apps on API 16 through 19 devices (Android 4.1 through 4.4 platforms).
 
 After the TLSv1.2 upgrade, native app support for user devices earlier than API 16 (Android 4.1 or `JELLY_BEAN`) are not available. Fortunately, as of December 5, 2016, [Google reports 2.5% of devices accessing the Play store are API 15 or earlier](http://developer.android.com/about/dashboards/index.html#Platform).
 
