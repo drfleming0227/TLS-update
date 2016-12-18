@@ -26,8 +26,7 @@ To get started, use the following notes to verify the TLSv1.2 readiness for your
 
 ### Prerequisites 
 
-* These checks assume that you have installed all the libraries required by the PayPal REST and Braintree SDKs. 
-
+* These checks assume that you have installed all libraries that the PayPal REST and Braintree SDKs require. 
 * For these checks to be valid, run them on a production system or one that *exactly* matches the production configuration.
 
 ### Java
@@ -57,11 +56,11 @@ To get started, use the following notes to verify the TLSv1.2 readiness for your
     java -version
     ```
 
-    If your Java version is 5 or earlier, upgrade it. 
+    If you have Java version 5 or earlier, upgrade it. 
 
     > **Note:** Java 8 is preferred because TLSv1.2 is the default in this Java version.
 
-1. Download the Java [TLS update](java) files.
+1. Download the [TlsCheck.java and TlsCheck.jar](java) files.
 
 1. In a shell on your **production system**, run:
 
@@ -96,11 +95,11 @@ To get started, use the following notes to verify the TLSv1.2 readiness for your
 
 #### .NET requirements
 
-To enable TLSv1.2, you must install the .NET runtime 4.5 or later.
+To enable TLSv1.2, you must install the .NET framework 4.5 or later.
 
 #### To verify your .NET and TLS versions
 
-1. Set the TLS version through [`ServicePointManager.SecurityProtocol`](https://msdn.microsoft.com/en-us/library/system.net.securityprotocoltype(v=vs.110).aspx).
+1. Set the TLS version through [`ServicePointManager.SecurityProtocol` enumeration](https://msdn.microsoft.com/en-us/library/system.net.securityprotocoltype(v=vs.110).aspx).
 
 1. To verify that you have .NET framework 4.5 or later, run [NetFrameworkVersions](net/NetFrameworkVersions) on the console of your production system. If you do not have .NET 4.5 or later, upgrade it.
 
@@ -132,7 +131,7 @@ To enable TLSv1.2, you must install the .NET runtime 4.5 or later.
 #### PHP requirements
 
 * PHP uses the system-supplied cURL library, which requires OpenSSL 1.0.1c or later. 
-* You might also need to [update your SSL/TLS libraries](http://curl.haxx.se/docs/ssl-compared.html).
+* You might need to [update your SSL/TLS libraries](http://curl.haxx.se/docs/ssl-compared.html).
 
 #### Guidelines
 
@@ -146,7 +145,7 @@ Find OpenSSL in these locations:
 
 These OpenSSL extensions can be different, and you update each one separately.
 
-The one that PayPal or any other PHP SDK uses to make HTTP connections is the one used by [PHP_CURL](#option-3). The PHP_CURL OpenSSL must support TLSv1.2.
+The OpenSSL extension that PayPal or any other PHP SDK uses to make HTTP connections is the one that [PHP_CURL](#option-3) uses. The PHP_CURL OpenSSL extension must support TLSv1.2.
 
 The `php_curl` library uses its own version of the OpenSSL library, which is not the same version that PHP uses, which is the `openssl.so` file in `php.ini`.
 
