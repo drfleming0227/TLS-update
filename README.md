@@ -308,11 +308,11 @@ These actions help you determine your openssl version.
 
 #### Android requirements
 
-TLSv1.2 is the default for client connections in API 20 (Android 4.4W "KitKat - wearable extensions").
+TLSv1.2 is the default for client connections in API 20 (Android 4.4W or `KITKAT` - wearable extensions).
 
 All Android app developers must make sure that their code and PayPal or Braintree SDKs provide explicit support for TLSv1.2. To verify correct implementation, test apps on Android 4.1-4.4 (API 16-19) devices.
 
-After the TLSv1.2 upgrade, native app support for user devices earlier than API 16 (Android 4.1 "Jelly Bean") are not available. Fortunately, as of December 5, 2016, [Google reports 2.5% of devices accessing the Play store are API 15 or earlier](http://developer.android.com/about/dashboards/index.html#Platform).
+After the TLSv1.2 upgrade, native app support for user devices earlier than API 16 (Android 4.1 or `JELLY_BEAN`) are not available. Fortunately, as of December 5, 2016, [Google reports 2.5% of devices accessing the Play store are API 15 or earlier](http://developer.android.com/about/dashboards/index.html#Platform).
 
 Users of the PayPal or Braintree Android SDKs must update to the latest version. To illustrate how to support TLSv1.2 outside of the SDK, we have provided an [example Android app](android/).
 
@@ -329,4 +329,4 @@ TLSv1.2 support was introduced in iOS 5. The [PayPal iOS SDK](https://github.com
 
 ### Windows
 
-Neither PayPal nor Braintree support any Windows SDKs. For a web browser integration, we recommend [Braintree v.zero for JavaScript](https://developers.braintreepayments.com/javascript+dotnet/guides/client-sdk).
+Neither PayPal nor Braintree support any Windows SDKs. For a web browser integration, we recommend [Braintree's JavaScript SDK](https://developers.braintreepayments.com/javascript+dotnet/guides/client-sdk).
