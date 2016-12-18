@@ -189,7 +189,7 @@ The `php_curl` library uses its own version of the OpenSSL library, which is not
 
 These actions help you determine your openssl version.
 
-> **Notes:** <ul><li>Make sure that your command line test uses the same versions of PHP and SSL/TLS libraries as your web server.</li><li>If you use MAMP or XAMPP as your development set up, the PHP that is packaged with them uses an earlier version of OpenSSL, which you cannot easily update. For more information about this issue and a temporary workaround, see [Unknown SSL protocol error](https://github.com/paypal/PayPal-PHP-SDK/issues/484#issuecomment-176240130).</li></ul>
+> **Notes:** <ul><li>Make sure that your command line test uses the same versions of PHP and SSL/TLS libraries that your web server uses.</li><li>If you use MAMP or XAMPP as your development set up, the PHP that is packaged with them uses an earlier version of OpenSSL, which you cannot easily update. For more information about this issue and a temporary workaround, see [Unknown SSL protocol error](https://github.com/paypal/PayPal-PHP-SDK/issues/484#issuecomment-176240130).</li></ul>
 
 * * *
 
@@ -231,6 +231,7 @@ These actions help you determine your openssl version.
             urllib2.URLError: <urlopen error EOF occurred in violation of protocol (_ssl.c:590)>
             urllib2.URLError: <urlopen error [Errno 54] Connection reset by peer>
             ```
+
 * * *
 
 ### Ruby
@@ -244,12 +245,12 @@ These actions help you determine your openssl version.
     
     * Ruby 2.0.0 or later is required to use TLSv1.2 from the system-supplied OpenSSL.
     * TLSv1.2 requires OpenSSL 1.0.1c or later.
-     
+
 * To update your dependencies, you might need to run `bundle update`.
 
 #### To verify Ruby and TLS versions
 
-1. For the PayPal legacy Ruby SDK, packaged as `PP_Ruby_NVP_SDK.zip`, download [this update](https://github.com/paypal/TLS-update/blob/master/ruby/PP_Ruby_NVP_SDK.zip).
+1. For the PayPal legacy Ruby SDK, packaged as `PP_Ruby_NVP_SDK.zip`, download this [PP_Ruby_NVP_SDK.zip](https://github.com/paypal/TLS-update/blob/master/ruby/PP_Ruby_NVP_SDK.zip).
 
 1. In a shell on your **production system**, run:
 
@@ -257,13 +258,13 @@ These actions help you determine your openssl version.
     $ ruby -r'net/http' -e 'puts Net::HTTP.get(URI("https://tlstest.paypal.com/"))'
     ```
 
-        * On success:
+    * On success:
     
-            ```
-            PayPal_Connection_OK
-            ```
+        ```
+        PayPal_Connection_OK
+        ```
 
-        * On failure, a `OpenSSL::SSL::SSLError` or `EOFError` is thrown.
+    * On failure, a `OpenSSL::SSL::SSLError` or `EOFError` is thrown.
 
 * * *
 
