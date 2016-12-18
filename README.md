@@ -167,21 +167,25 @@ The `php_curl` library uses its own version of the OpenSSL library, which is not
 
 1. When you update your OpenSSL libraries, you must update the `php_curl` OpenSSL version and not the OS OpenSSL version.
 
-1. In a shell on your **production system**, download [cacert.pem](php/cacert.pem) and [TlsCheck.php](php/TlsCheck.php). Then, run this command:
+1. Download [cacert.pem](php/cacert.pem) and [TlsCheck.php](php/TlsCheck.php).
 
-        ```
-        php -f TlsCheck.php
-        ```
+1. In a shell on your **production system**, run:
 
-        * On success:
-            ```
-            PayPal_Connection_OK
-            ```
+    ```
+    php -f TlsCheck.php
+    ```
+
+    * On success:
         
-        * On failure:
-            ```
-            curl_error information
-            ```
+        ```
+        PayPal_Connection_OK
+        ```
+        
+    * On failure:
+            
+        ```
+        curl_error information
+        ```
 
 These actions help you determine your openssl version.
 
